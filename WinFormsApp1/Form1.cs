@@ -7,11 +7,16 @@ namespace WinFormsApp1
     {
         public Form1()
         {
-          
+             InitializeComponent();
 
-            InitializeComponent();
-
-
+                         var services = new ServiceCollection();
+            services.AddWindowsFormsBlazorWebView();
+#if DEBUG
+            services.AddBlazorWebViewDeveloperTools();
+#endif
+            blazorWebView1.HostPage = "wwwroot\\index.html";
+            blazorWebView1.Services = services.BuildServiceProvider();
+            blazorWebView1.RootComponents.Add<App>("#app");
         }
     }
 }
